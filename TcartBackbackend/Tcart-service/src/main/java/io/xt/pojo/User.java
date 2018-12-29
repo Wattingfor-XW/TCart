@@ -69,7 +69,7 @@ public class User {
         return encryptedPassword;
     }
 
-    public void setEncryptedPassword(byte[] encryptedPassword) {
+    public void setEncryptedPassword(String encryptedPassword) {
         this.encryptedPassword = encryptedPassword == null ? null : encryptedPassword.trim();
     }
 

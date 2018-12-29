@@ -32,7 +32,7 @@ public class UserServiceImpl implements UserService {
     user.setLastName(userAddDTO.getLastName());
     user.setEmail(userAddDTO.getEmail());
     user.setAvatarUrl(userAddDTO.getAvatarUrl());
-    user.setEncryptedPassword(DigestUtils.md5Digest(userAddDTO.getPassword().getBytes()));
+    user.setEncryptedPassword(String.valueOf(DigestUtils.md5Digest(userAddDTO.getPassword().getBytes())));
     user.setRoles(Constant.rolesStr);
     userMapper.insert(user);
     }
