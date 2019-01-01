@@ -1,12 +1,16 @@
 package io.xt.controller;
 
+import com.alibaba.fastjson.JSON;
 import io.xt.dto.AddUserDTO;
+import io.xt.dto.LoginIofo;
 import io.xt.exception.BackendClientException;
 import io.xt.pojo.User;
 import io.xt.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Date;
 
 @RestController
 @RequestMapping("/user")
@@ -33,6 +37,9 @@ public class UserController {
                 throw new BackendClientException("密码错误");
             }
         }
+        LoginIofo loginIofo = new LoginIofo(username, byUsername.getRoles(), new Date());
+        String loginIofoStr = JSON.toJSONString(loginIofo);
+
         return "token";
     }
 }
