@@ -10,6 +10,7 @@
     </parent>
     <groupId>io.xt</groupId>
     <artifactId>tcart-store-webapi</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
     <name>tcart-store-webapi</name>
     <description>Store Webapi for Tcart</description>
     <modelVersion>4.0.0</modelVersion>

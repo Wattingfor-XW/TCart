@@ -10,6 +10,7 @@
     </parent>
     <groupId>io.xt</groupId>
     <artifactId>tcart-admin-webapi</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
     <name>tcart-admin-webapi</name>
     <description>Admin WebApi for JCart</description>
     <modelVersion>4.0.0</modelVersion>

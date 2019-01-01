@@ -10,6 +10,7 @@
     </parent>
     <groupId>io.xt</groupId>
     <artifactId>tcart-service</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
     <name>tcart-service</name>
     <description>Service for TCart</description>
     <modelVersion>4.0.0</modelVersion>
