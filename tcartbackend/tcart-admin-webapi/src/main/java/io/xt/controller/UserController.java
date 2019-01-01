@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Base64;
 import java.util.Date;
 
 @RestController
@@ -39,7 +40,8 @@ public class UserController {
         }
         LoginIofo loginIofo = new LoginIofo(username, byUsername.getRoles(), new Date());
         String loginIofoStr = JSON.toJSONString(loginIofo);
-
-        return "token";
+        //todo encrypt toketr
+        String token = Base64.getEncoder().encodeToString(loginIofoStr.getBytes());
+        return token;
     }
 }
