@@ -13,6 +13,14 @@ import org.springframework.util.DigestUtils;
 public class UsetServiceImpl implements UserService {
     @Autowired
     UserMapper userMapper;
+
+
+    @Override
+    public User getUserById(Long userId) {
+        User user = userMapper.selectByPrimaryKey(userId);
+        return user;
+    }
+
     @Override
     public void addUser(AddUserDTO addUserDTO) {
         User user = new User();
@@ -25,4 +33,12 @@ public class UsetServiceImpl implements UserService {
         user.setRoles(Constant.rolesStr);
         userMapper.insert(user);
     }
+
+    @Override
+    public User getByUsername(String username) {
+        User user = userMapper.selectByUsername(username);
+        return user;
+    }
+
+
 }
