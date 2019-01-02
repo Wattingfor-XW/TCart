@@ -23,6 +23,11 @@ public class UserController {
         User user = userService.getUserById(userId);
         return user;
     }
+    @GetMapping("/getCurrentUserInfo")
+    public User getCurrentUserInfo(@RequestAttribute Long userId){
+        User currentUser = userService.getUserById(userId);
+        return currentUser;
+    }
     @PostMapping("/addUser")
     public void addUser(@RequestBody AddUserDTO addUserDTO){
         userService.addUser(addUserDTO);

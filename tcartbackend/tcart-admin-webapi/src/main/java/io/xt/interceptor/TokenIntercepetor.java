@@ -37,6 +37,7 @@ public class TokenIntercepetor implements HandlerInterceptor  {
         }catch (Exception ex){
             throw new BackendUnauthenticationException("auth invalid caused by some issues");
         }
+        Long userId = loginIofo.getUserId();
         String username = loginIofo.getUsername();
         if (username==null){
             throw new BackendUnauthenticationException("Unauthentication");
@@ -47,7 +48,8 @@ public class TokenIntercepetor implements HandlerInterceptor  {
         if (username==null&&username.isEmpty()&&(currentTimestamp>expireTimestamp)) {
             throw new BackendUnauthenticationException("Unauthentication");
         }
-
+        request.setAttribute("userId",userId);
+        request.setAttribute("username",username);
         return true;
     }
 }
