@@ -2,13 +2,22 @@ package io.xt.dto;
 
 import java.util.Date;
 public class LoginIofo {
+    private Long userId;
     private String username;
     private String roles;
     private Date issuedAt;
     private Date expirationTime;
 
+    public Long getUserId() {
+        return userId;
+    }
 
-    public LoginIofo(String username, String roles, Date issuedAt) {
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
+    public LoginIofo(Long userId,String username, String roles, Date issuedAt) {
+        this.userId=userId;
         this.username = username;
         this.roles = roles;
         this.issuedAt = issuedAt;

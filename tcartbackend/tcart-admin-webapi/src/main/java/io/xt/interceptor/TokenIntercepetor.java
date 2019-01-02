@@ -8,20 +8,28 @@ import org.springframework.web.servlet.HandlerInterceptor;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.UnsupportedEncodingException;
 import java.util.Base64;
 import java.util.Date;
 
 @Component
 public class TokenIntercepetor implements HandlerInterceptor  {
     @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws UnsupportedEncodingException, BackendUnauthenticationException {
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String authorizationStr = request.getHeader("Authorization");
+        if (authorizationStr == null){
+            throw new BackendUnauthenticationException("Unauthentication");
+        }
         String[] s = authorizationStr.split(" ");
         String token = s[1];
-        byte[] decode = Base64.getDecoder().decode(token);
-        String loginJsonStr = new String(decode, "UTF-8");
-        LoginIofo loginIofo = JSON.parseObject(loginJsonStr, LoginIofo.class);
+        LoginIofo loginIofo;
+        try {
+            //todo decrypted token with aes or rsa
+            byte[] decode = Base64.getDecoder().decode(token);
+            String loginJsonStr = new String(decode, "UTF-8");
+            loginIofo = JSON.parseObject(loginJsonStr, LoginIofo.class);
+        }catch (Exception ex){
+            throw new BackendUnauthenticationException("auth invalid caused by some issues");
+        }
         String username = loginIofo.getUsername();
         if (username==null){
             throw new BackendUnauthenticationException("Unauthentication");

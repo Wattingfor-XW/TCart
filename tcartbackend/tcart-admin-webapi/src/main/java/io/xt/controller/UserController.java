@@ -38,7 +38,7 @@ public class UserController {
                 throw new BackendClientException("密码错误");
             }
         }
-        LoginIofo loginIofo = new LoginIofo(username, byUsername.getRoles(), new Date());
+        LoginIofo loginIofo = new LoginIofo(byUsername.getUserId(),byUsername.getUsername(), byUsername.getRoles(), new Date());
         String loginIofoStr = JSON.toJSONString(loginIofo);
         //todo encrypt toketr
         String token = Base64.getEncoder().encodeToString(loginIofoStr.getBytes());
