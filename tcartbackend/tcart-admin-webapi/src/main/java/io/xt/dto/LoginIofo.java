@@ -22,7 +22,7 @@ public class LoginIofo {
         this.roles = roles;
         this.issuedAt = issuedAt;
         Long issuedAtTimetamp = issuedAt.getTime();
-        Long expirationTimetemp = issuedAtTimetamp+86400000;
+        Long expirationTimetemp = issuedAtTimetamp+600000;
         this.expirationTime = new Date(expirationTimetemp);
     }
 

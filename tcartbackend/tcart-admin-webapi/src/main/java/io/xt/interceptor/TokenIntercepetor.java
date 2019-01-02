@@ -8,13 +8,20 @@ import org.springframework.web.servlet.HandlerInterceptor;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Arrays;
 import java.util.Base64;
 import java.util.Date;
 
 @Component
 public class TokenIntercepetor implements HandlerInterceptor  {
+    private String [] urls={"/user/login"};
+
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+        boolean contains = Arrays.asList(urls).contains(request.getRequestURI());
+        if (contains){
+            return true;
+        }
         String authorizationStr = request.getHeader("Authorization");
         if (authorizationStr == null){
             throw new BackendUnauthenticationException("Unauthentication");
