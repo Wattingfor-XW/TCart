@@ -50,6 +50,7 @@ public class TokenIntercepetor implements HandlerInterceptor  {
         }
         request.setAttribute("userId",userId);
         request.setAttribute("username",username);
+
         return true;
     }
 }
