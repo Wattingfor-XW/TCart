@@ -1,8 +1,10 @@
 package io.xt.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.github.pagehelper.PageInfo;
 import io.xt.dto.UserAddDTO;
 import io.xt.dto.LoginIofo;
+import io.xt.dto.UserListDTO;
 import io.xt.dto.UserUpdateDTO;
 import io.xt.exception.BackendClientException;
 import io.xt.pojo.User;
@@ -54,5 +56,10 @@ public class UserController {
     @PostMapping("/update")
     public void update(@RequestBody UserUpdateDTO userUpdateDTO){
         userService.update(userUpdateDTO);
+    }
+    @GetMapping("/getUserWithPage")
+    public PageInfo<UserListDTO> getUserWithPage(@RequestParam(required = false,defaultValue = "1") Integer pageNum){
+        PageInfo<UserListDTO> usersWithPage = userService.getUsersWithPage(pageNum);
+        return usersWithPage;
     }
 }
