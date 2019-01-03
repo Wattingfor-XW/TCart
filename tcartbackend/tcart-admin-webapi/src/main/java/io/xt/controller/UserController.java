@@ -26,11 +26,13 @@ public class UserController {
         User user = userService.getUserById(userId);
         return user;
     }
+
     @GetMapping("/getCurrentUserInfo")
     public User getCurrentUserInfo(@RequestAttribute Long userId){
         User currentUser = userService.getUserById(userId);
         return currentUser;
     }
+
     @PostMapping("/addUser")
     public void addUser(@RequestBody UserAddDTO userAddDTO){
         userService.addUser(userAddDTO);
@@ -40,7 +42,6 @@ public class UserController {
         User byUsername = userService.getByUsername(username);
         if(byUsername==null){
             throw new BackendClientException("账户不存在");
-
         }else{
             if(!byUsername.getEncryptedPassword().equals(DigestUtils.md5DigestAsHex(password.getBytes()))){
                 throw new BackendClientException("密码错误");
@@ -57,9 +58,16 @@ public class UserController {
     public void update(@RequestBody UserUpdateDTO userUpdateDTO){
         userService.update(userUpdateDTO);
     }
+
     @GetMapping("/getUserWithPage")
     public PageInfo<UserListDTO> getUserWithPage(@RequestParam(required = false,defaultValue = "1") Integer pageNum){
         PageInfo<UserListDTO> usersWithPage = userService.getUsersWithPage(pageNum);
         return usersWithPage;
+    }
+    @PostMapping("/batchDelect")
+    public void batchDelect(@RequestBody Long [] userIds){
+        for (Long  userId : userIds){
+         userService.batchDelect(userId);
+        }
     }
 }

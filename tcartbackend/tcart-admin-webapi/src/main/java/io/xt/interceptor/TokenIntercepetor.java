@@ -45,8 +45,11 @@ public class TokenIntercepetor implements HandlerInterceptor  {
         long expireTimestamp = loginIofo.getExpirationTime().getTime();
         Date currentTime = new Date();
         Long currentTimestamp = currentTime.getTime();
-        if (username==null&&username.isEmpty()&&(currentTimestamp>expireTimestamp)) {
-            throw new BackendUnauthenticationException("Unauthentication");
+        if (username==null&&username.isEmpty()) {
+            throw new BackendUnauthenticationException("Unauthentication:username is null or    empty");
+        }
+        if(currentTimestamp>expireTimestamp){
+            throw new BackendUnauthenticationException("Unauthentication: token is expired");
         }
         request.setAttribute("userId",userId);
         request.setAttribute("username",username);

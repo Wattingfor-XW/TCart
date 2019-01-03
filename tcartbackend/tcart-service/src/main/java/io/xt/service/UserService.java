@@ -12,4 +12,5 @@ public interface UserService {
     public User getByUsername(String username);
     public void update(UserUpdateDTO userUpdateDTO);
     public PageInfo<UserListDTO> getUsersWithPage(Integer pageNum);
+    public void batchDelect(Long userId);
 }

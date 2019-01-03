@@ -66,5 +66,10 @@ public class UsetServiceImpl implements UserService {
         return userPageInfo;
     }
 
+    @Override
+    public void batchDelect(Long userId) {
+        userMapper.deleteByPrimaryKey(userId);
+    }
+
 
 }
