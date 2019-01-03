@@ -19,8 +19,10 @@ import java.util.Date;
 @RestController
 @RequestMapping("/user")
 public class UserController {
+
     @Autowired
     private UserService userService;
+
     @GetMapping("/getUserById")
     public User getUserById(@RequestParam Long userId){
         User user = userService.getUserById(userId);
@@ -37,6 +39,7 @@ public class UserController {
     public void addUser(@RequestBody UserAddDTO userAddDTO){
         userService.addUser(userAddDTO);
     }
+
     @GetMapping("/login")
     public String login(String username,String password) throws BackendClientException {
         User byUsername = userService.getByUsername(username);
