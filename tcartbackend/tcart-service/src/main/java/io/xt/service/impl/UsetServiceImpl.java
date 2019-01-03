@@ -1,7 +1,8 @@
 package io.xt.service.impl;
 
 import io.xt.dao.UserMapper;
-import io.xt.dto.AddUserDTO;
+import io.xt.dto.UserAddDTO;
+import io.xt.dto.UserUpdateDTO;
 import io.xt.pojo.User;
 import io.xt.service.UserService;
 import io.xt.uitl.Constant;
@@ -22,14 +23,14 @@ public class UsetServiceImpl implements UserService {
     }
 
     @Override
-    public void addUser(AddUserDTO addUserDTO) {
+    public void addUser(UserAddDTO userAddDTO) {
         User user = new User();
-        user.setUsername(addUserDTO.getUsername());
-        user.setEmail(addUserDTO.getEmail());
-        user.setFirstName(addUserDTO.getFirstName());
-        user.setAvatarUrl(addUserDTO.getAvatarUrl());
-        user.setLastName(addUserDTO.getLastName());
-        user.setEncryptedPassword(DigestUtils.md5DigestAsHex(addUserDTO.getPassword().getBytes()));
+        user.setUsername(userAddDTO.getUsername());
+        user.setEmail(userAddDTO.getEmail());
+        user.setFirstName(userAddDTO.getFirstName());
+        user.setAvatarUrl(userAddDTO.getAvatarUrl());
+        user.setLastName(userAddDTO.getLastName());
+        user.setEncryptedPassword(DigestUtils.md5DigestAsHex(userAddDTO.getPassword().getBytes()));
         user.setRoles(Constant.rolesStr);
         userMapper.insert(user);
     }
@@ -38,6 +39,18 @@ public class UsetServiceImpl implements UserService {
     public User getByUsername(String username) {
         User user = userMapper.selectByUsername(username);
         return user;
+    }
+
+    @Override
+    public void update(UserUpdateDTO userUpdateDTO) {
+        User user = userMapper.selectByPrimaryKey(userUpdateDTO.getUserId());
+        user.setUsername(userUpdateDTO.getUsername());
+        user.setFirstName(userUpdateDTO.getFirstName());
+        user.setLastName(userUpdateDTO.getLastName());
+        user.setEmail(userUpdateDTO.getEmail());
+        user.setAvatarUrl(userUpdateDTO.getAvatarUrl());
+        user.setEncryptedPassword(DigestUtils.md5DigestAsHex(userUpdateDTO.getPassword().getBytes()));
+        userMapper.updateByPrimaryKey(user);
     }
 
 

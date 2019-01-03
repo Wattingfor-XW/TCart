@@ -1,8 +1,9 @@
 package io.xt.controller;
 
 import com.alibaba.fastjson.JSON;
-import io.xt.dto.AddUserDTO;
+import io.xt.dto.UserAddDTO;
 import io.xt.dto.LoginIofo;
+import io.xt.dto.UserUpdateDTO;
 import io.xt.exception.BackendClientException;
 import io.xt.pojo.User;
 import io.xt.service.UserService;
@@ -29,8 +30,8 @@ public class UserController {
         return currentUser;
     }
     @PostMapping("/addUser")
-    public void addUser(@RequestBody AddUserDTO addUserDTO){
-        userService.addUser(addUserDTO);
+    public void addUser(@RequestBody UserAddDTO userAddDTO){
+        userService.addUser(userAddDTO);
     }
     @GetMapping("/login")
     public String login(String username,String password) throws BackendClientException {
@@ -48,5 +49,10 @@ public class UserController {
         //todo encrypt toketr
         String token = Base64.getEncoder().encodeToString(loginIofoStr.getBytes());
         return token;
+    }
+
+    @PostMapping("/update")
+    public void update(@RequestBody UserUpdateDTO userUpdateDTO){
+        userService.update(userUpdateDTO);
     }
 }

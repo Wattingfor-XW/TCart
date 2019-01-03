@@ -1,6 +1,6 @@
 package io.xt.dto;
 
-public class AddUserDTO {
+public class UserAddDTO {
     private String username;
     private String firstName;
     private String lastName;
