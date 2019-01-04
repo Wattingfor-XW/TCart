@@ -14,7 +14,7 @@ import java.util.Date;
 
 @Component
 public class TokenIntercepetor implements HandlerInterceptor  {
-    private String [] urls={"/user/login"};
+    private String [] urls={"/user/login","/error"};
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
