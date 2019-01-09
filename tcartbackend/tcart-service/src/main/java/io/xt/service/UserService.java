@@ -13,4 +13,5 @@ public interface UserService {
     public void update(UserUpdateDTO userUpdateDTO);
     public PageInfo<UserListDTO> getUsersWithPage(Integer pageNum);
     public void batchDelect(Long userId);
+    public void changeUserPasswordByEmail(String email,String password);
 }

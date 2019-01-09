@@ -10,11 +10,19 @@ import io.xt.exception.BackendClientException;
 import io.xt.pojo.User;
 import io.xt.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.constraints.Email;
+import javax.xml.bind.DatatypeConverter;
+import java.security.SecureRandom;
 import java.util.Base64;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 @RestController
 @RequestMapping("/user")
@@ -22,6 +30,15 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private JavaMailSender javaMailSender;
+
+    @Autowired
+    private RedisTemplate redisTemplate;
+
+    @Value("${spring.mail.username}")
+    private String sendAddress;
 
     @GetMapping("/getUserById")
     public User getUserById(@RequestParam Long userId){
@@ -72,5 +89,33 @@ public class UserController {
         for (Long  userId : userIds){
          userService.batchDelect(userId);
         }
+    }
+    @GetMapping("/resetPassword")
+    public void resetPassword(@RequestParam @Email String email){
+        SecureRandom secureRandom = new SecureRandom();
+        byte[] bytes = secureRandom.generateSeed(3);
+        String code = DatatypeConverter.printHexBinary(bytes);
+        SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
+        simpleMailMessage.setFrom(sendAddress);
+        simpleMailMessage.setTo(email);
+        simpleMailMessage.setSubject("TCart Email Verify Code");
+        simpleMailMessage.setText(code);
+        javaMailSender.send(simpleMailMessage);
+        redisTemplate.opsForValue().set(email, code, 10*60, TimeUnit.SECONDS);
+    }
+    @GetMapping("/verifyCode")
+    public void verifyEmailCode(@RequestParam @Email String email,@RequestParam String code) throws BackendClientException {
+        String redisCode = (String) redisTemplate.opsForValue().get(email);
+        if (redisCode == null) {
+            throw new BackendClientException("email verify code is expire");
+        }
+        if (!redisCode.equals(code)) {
+            throw new BackendClientException("email verify code is expire");
+        }
+        userService.changeUserPasswordByEmail(email,"123456");
+    }
+    @PostMapping("/changePassword")
+    public void changePassword(@RequestParam @Email String email,@RequestParam String password){
+        userService.changeUserPasswordByEmail(email,password);
     }
 }

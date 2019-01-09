@@ -71,5 +71,11 @@ public class UsetServiceImpl implements UserService {
         userMapper.deleteByPrimaryKey(userId);
     }
 
+    @Override
+    public void changeUserPasswordByEmail(String email, String password) {
+        User user = userMapper.selectByEmail(email);
+        userMapper.updateByPrimaryKey(user);
+    }
+
 
 }

@@ -141,4 +141,9 @@
   <select id="selectWithPage" resultMap="UserListDTO">
     select user_id,username form user
   </select>
+  <select id="selectByEmail" resultMap="BaseResultMap">
+    select * form user
+    where
+    email = #{email,jdbcType=VARCHAR}
+  </select>
 </mapper>
