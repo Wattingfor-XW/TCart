@@ -84,12 +84,19 @@ public class UserController {
         PageInfo<UserListDTO> usersWithPage = userService.getUsersWithPage(pageNum);
         return usersWithPage;
     }
+
     @PostMapping("/batchDelect")
     public void batchDelect(@RequestBody Long [] userIds){
         for (Long  userId : userIds){
          userService.batchDelect(userId);
         }
     }
+
+    @PostMapping("/changePassword")
+    public void changePassword(@RequestParam @Email String email,@RequestParam String password){
+        userService.changeUserPasswordByEmail(email,password);
+    }
+
     @GetMapping("/resetPassword")
     public void resetPassword(@RequestParam @Email String email){
         SecureRandom secureRandom = new SecureRandom();
@@ -114,8 +121,5 @@ public class UserController {
         }
         userService.changeUserPasswordByEmail(email,"123456");
     }
-    @PostMapping("/changePassword")
-    public void changePassword(@RequestParam @Email String email,@RequestParam String password){
-        userService.changeUserPasswordByEmail(email,password);
-    }
+
 }
