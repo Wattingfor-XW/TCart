@@ -131,18 +131,19 @@
       roles = #{roles,jdbcType=VARCHAR}
     where user_id = #{userId,jdbcType=BIGINT}
   </update>
+  <update id="changeUserPasswordByEmail" parameterType="io.xt.pojo.User">
+    update user
+    set
+      encrypted_password = #{encryptedPassword,jdbcType=CHAR},
+    where user_id = #{userId,jdbcType=BIGINT}
+  </update>
 
-  <select id="selectByUsername" parameterType="java.lang.String" resultMap="BaseResultMap">
-    select
-    <include refid="Base_Column_List" />
-    from user
-    where username = #{username,jdbcType=VARCHAR}
-  </select>
+
   <select id="selectWithPage" resultMap="UserListDTO">
     select user_id,username form user
   </select>
-  <select id="selectByEmail" >
-    select * form user
+  <select id="selectByEmail"  parameterType="java.lang.String" resultMap="BaseResultMap">
+    select * from  user
     where
     email = #{email,jdbcType=VARCHAR}
   </select>

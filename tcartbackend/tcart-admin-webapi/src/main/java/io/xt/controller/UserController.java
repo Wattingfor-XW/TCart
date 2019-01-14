@@ -124,7 +124,7 @@ public class UserController {
         if (!redisCode.equals(code)) {
             throw new BackendClientException("email verify code is expire");
         }
-        userService.changeUserPasswordByEmail(email,"654321");
+        userService.changeUserPasswordByEmail(email,"123456");
     }
 
     @PostMapping("/uploadAvatar")

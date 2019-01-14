@@ -74,7 +74,7 @@ public class UsetServiceImpl implements UserService {
     @Override
     public void changeUserPasswordByEmail(String email, String password) {
         User user = userMapper.selectByEmail(email);
-        user.setEncryptedPassword(password);
+        user.setEncryptedPassword(DigestUtils.md5DigestAsHex(password.getBytes()));
         userMapper.updateByPrimaryKey(user);
 
     }

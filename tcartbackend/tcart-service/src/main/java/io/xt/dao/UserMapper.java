@@ -22,5 +22,6 @@ public interface UserMapper {
 
     Page<UserListDTO> selectWithPage();
 
-    User selectByEmail(@Param("email") String email);
+    User selectByEmail(String email);
+
 }
