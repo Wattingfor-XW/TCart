@@ -4,6 +4,9 @@
   <component name="MavenProjectsManager">
     <option name="originalFiles">
       <list>
+        <option value="$PROJECT_DIR$/tcart-service/pom.xml" />
+        <option value="$PROJECT_DIR$/tcart-store-webapi/pom.xml" />
+        <option value="$PROJECT_DIR$/tcart-admin-webapi/pom.xml" />
         <option value="$PROJECT_DIR$/pom.xml" />
       </list>
     </option>
