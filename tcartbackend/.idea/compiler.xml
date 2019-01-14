@@ -7,6 +7,9 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="tcart-admin-webapi" />
+        <module name="tcart-service" />
+        <module name="tcart-store-webapi" />
         <module name="tcartadminwebapi" />
         <module name="tcartservice" />
         <module name="tcartstorewebapi" />

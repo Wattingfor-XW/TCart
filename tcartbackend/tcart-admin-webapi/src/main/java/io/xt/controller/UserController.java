@@ -16,12 +16,16 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.Email;
 import javax.xml.bind.DatatypeConverter;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.security.SecureRandom;
 import java.util.Base64;
 import java.util.Date;
+import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 @RestController
@@ -122,4 +126,23 @@ public class UserController {
         userService.changeUserPasswordByEmail(email,"123456");
     }
 
+    @PostMapping("/uploadAvatar")
+    public String uploadAvatar(@RequestParam("file") MultipartFile file) throws Exception {
+        String contentType = file.getContentType();
+        if(!contentType.equals("image/png")&&!contentType.equals("image/jpg")){
+            throw new BackendClientException("file only support png or jpg");
+        }
+        UUID uuid = UUID.randomUUID();
+        String type = file.getContentType();
+        type = type.split("/")[1];
+        String fileName = String.format("%s.%s", uuid, type);
+        String url = String.format("avatarimg/%s", fileName);
+        storeAvatar(file.getBytes(),url);
+        return fileName;
+    }
+    private void storeAvatar(byte[] imgData, String fileName) throws Exception {
+        FileOutputStream out = new FileOutputStream(fileName);
+        out.write(imgData);
+        out.close();
+    }
 }
