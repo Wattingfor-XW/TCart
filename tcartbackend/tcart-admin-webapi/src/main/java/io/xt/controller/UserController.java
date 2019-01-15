@@ -21,7 +21,6 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.validation.constraints.Email;
 import javax.xml.bind.DatatypeConverter;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.security.SecureRandom;
 import java.util.Base64;
 import java.util.Date;
@@ -29,6 +28,7 @@ import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/user")
 public class UserController {
 
@@ -102,48 +102,53 @@ public class UserController {
     }
 
     @GetMapping("/resetPassword")
-    public void resetPassword(@RequestParam @Email String email){
-        SecureRandom secureRandom = new SecureRandom();
-        byte[] bytes = secureRandom.generateSeed(3);
-        String code = DatatypeConverter.printHexBinary(bytes);
-        SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
-        simpleMailMessage.setFrom(sendAddress);
-        simpleMailMessage.setTo(email);
-        simpleMailMessage.setSubject("TCart Email Verify Code");
-        simpleMailMessage.setText(code);
-        javaMailSender.send(simpleMailMessage);
-
-        redisTemplate.opsForValue().set(email, code, 10*60, TimeUnit.SECONDS);
+    public void resetPassword(@RequestParam String username,@RequestParam @Email String email) throws BackendClientException {
+        User byUsername = userService.getByUsername(username);
+        String email1 = byUsername.getEmail();
+        if(email1.equals(email)){
+            SecureRandom secureRandom = new SecureRandom();
+            byte[] bytes = secureRandom.generateSeed(3);
+            String code = DatatypeConverter.printHexBinary(bytes);
+            SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
+            simpleMailMessage.setFrom(sendAddress);
+            simpleMailMessage.setTo(email);
+            simpleMailMessage.setSubject("TCart Email Verify Code");
+            simpleMailMessage.setText(code);
+            javaMailSender.send(simpleMailMessage);
+            redisTemplate.opsForValue().set(email, code, 10*60, TimeUnit.SECONDS);
+        }else{
+            throw new BackendClientException("账户与邮箱不对应");
+        }
     }
     @GetMapping("/verifyCode")
-    public void verifyEmailCode(@RequestParam @Email String email,@RequestParam String code) throws BackendClientException {
-        String redisCode = (String) redisTemplate.opsForValue().get(email);
-        if (redisCode == null) {
-            throw new BackendClientException("email verify code is expire");
-        }
-        if (!redisCode.equals(code)) {
-            throw new BackendClientException("email verify code is expire");
-        }
-        userService.changeUserPasswordByEmail(email,"123456");
+    public void verifyEmailCode(@RequestParam @Email String email,@RequestParam String code,@RequestParam String password) throws BackendClientException {
+            String redisCode = (String) redisTemplate.opsForValue().get(email);
+            if (redisCode == null) {
+                throw new BackendClientException("email verify code is expire");
+            }
+            if (!redisCode.equals(code)) {
+                throw new BackendClientException("email verify code is expire");
+            }
+            userService.changeUserPasswordByEmail(email,password);
     }
 
-    @PostMapping("/uploadAvatar")
-    public String uploadAvatar(@RequestParam("file") MultipartFile file) throws Exception {
-        String contentType = file.getContentType();
-        if(!contentType.equals("image/png")&&!contentType.equals("image/jpg")){
-            throw new BackendClientException("file only support png or jpg");
-        }
-        UUID uuid = UUID.randomUUID();
-        String type = file.getContentType();
-        type = type.split("/")[1];
-        String fileName = String.format("%s.%s", uuid, type);
-        String url = String.format("avatarimg/%s", fileName);
-        storeAvatar(file.getBytes(),url);
-        return fileName;
-    }
-    private void storeAvatar(byte[] imgData, String fileName) throws Exception {
-        FileOutputStream out = new FileOutputStream(fileName);
-        out.write(imgData);
-        out.close();
-    }
+//    @PostMapping("/uploadAvatar")
+//    public String uploadAvatar(@RequestParam("file") MultipartFile file) throws Exception {
+//        String contentType = file.getContentType();
+//        if(!contentType.equals("image/png")&&!contentType.equals("image/jpg")){
+//            throw new BackendClientException("file only support png or jpg");
+//        }
+//        UUID uuid = UUID.randomUUID();
+//        String type = file.getContentType();
+//        type = type.split("/")[1];
+//        String fileName = String.format("%s.%s", uuid, type);
+//        String url = String.format("avatarimg/%s", fileName);
+//        storeAvatar(file.getBytes(),url);
+//        return fileName;
+//    }
+//    private void storeAvatar(byte[] imgData, String fileName) throws Exception {
+//        FileOutputStream out = new FileOutputStream(fileName);
+//        out.write(imgData);
+//        out.close();
+//    }
 }

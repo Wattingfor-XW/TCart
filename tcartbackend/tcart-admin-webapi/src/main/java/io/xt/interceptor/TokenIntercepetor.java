@@ -16,11 +16,12 @@ import java.util.Date;
 public class TokenIntercepetor implements HandlerInterceptor  {
     private String [] urls={
             "/user/login",
-            "/error",
-            "/user/getUserWithPage",
-            "/user/verifyCode",
-            "/user/resetPassword",
-            "/user/changePassword"
+            "/error"
+//            "/user/addUser",
+//            "/user/getUserWithPage",
+//            "/user/verifyCode",
+//            "/user/resetPassword",
+//            "/user/changePassword"
     };
 
     @Override
