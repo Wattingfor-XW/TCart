@@ -29,6 +29,7 @@ import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/user")
 public class UserController {
 
@@ -73,7 +74,6 @@ public class UserController {
         }
         LoginIofo loginIofo = new LoginIofo(byUsername.getUserId(),byUsername.getUsername(), byUsername.getRoles(), new Date());
         String loginIofoStr = JSON.toJSONString(loginIofo);
-        //todo encrypt toketr
         String token = Base64.getEncoder().encodeToString(loginIofoStr.getBytes());
         return token;
     }
