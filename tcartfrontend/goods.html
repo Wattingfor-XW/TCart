@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="assets/css/elementui.css">
+    <script src="assets/js/vue.js"></script>
+    <script src="assets/js/elementui.js"></script>
+    <script src="assets/js/axios.min.js"></script>
+    <script src="assets/js/common.js"></script>
+</head>
+<body>
+    <div id="app">
+            <el-button type="primary" @click="handleAddgoodsClick" plain>添加商品</el-button>
+            <el-button type="primary" @click="handleDeletegoodsClick" plain>下架商品</el-button>
+            <template>
+                    <el-table ref="multipleTable"   :data="pageInfo.list" tooltip-effect="dark" style="width: 100%" @selection-change="handleSelectionChange">
+                    <el-table-column type="selection"  width="55">
+                    </el-table-column>
+                      </el-table-column>
+                      <el-table-column  prop="userId" label="商品编号">
+                      </el-table-column>
+                      <el-table-column  prop="username"  label="商品名称">
+                      </el-table-column>
+                      <el-table-column  prop="username"  label="价格">
+                        </el-table-column>
+                        <el-table-column  prop="username"  label="xx">
+                            </el-table-column>
+                            <el-table-column  prop="username"  label="xx">
+                                </el-table-column>
+                    </el-table>
+                    <!-- <el-pagination layout="prev, pager, next" :total="pageInfo.total":page-size="pageInfo.pageSize"@current-change="handleCurrentChange">
+                    </el-pagination> -->
+                  </template>
+                  
+
+    </div>
+    <script src="js/goods.js"></script>
+</body>
+</html>
