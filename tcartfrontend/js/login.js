@@ -6,7 +6,7 @@ var app = new Vue({
     },
     methods:{
         handleRetrieveClick(){
-            location.href="retrievePassword.html";
+            location.href="Retrieve.html";
         },
         handleLoginClick(){
             this.login();

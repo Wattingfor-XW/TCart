@@ -3,7 +3,6 @@ package io.xt.dao;
 import com.github.pagehelper.Page;
 import io.xt.dto.UserListDTO;
 import io.xt.pojo.User;
-import org.apache.ibatis.annotations.Param;
 
 public interface UserMapper {
     int deleteByPrimaryKey(Long userId);

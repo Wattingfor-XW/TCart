@@ -137,8 +137,6 @@
       encrypted_password = #{encryptedPassword,jdbcType=CHAR},
     where user_id = #{userId,jdbcType=BIGINT}
   </update>
-
-
   <select id="selectWithPage" resultMap="UserListDTO">
     select user_id,username form user
   </select>
@@ -152,4 +150,5 @@
     where
     username = #{username,jdbcType=VARCHAR}
   </select>
+
 </mapper>

@@ -16,7 +16,9 @@ import java.util.Date;
 public class TokenIntercepetor implements HandlerInterceptor  {
     private String [] urls={
             "/user/login",
-            "/error"
+            "/error",
+            "/user/resetPassword",
+            "/user/verifyCode"
     };
 
     @Override
@@ -37,7 +39,6 @@ public class TokenIntercepetor implements HandlerInterceptor  {
         String token = s[1];
         LoginIofo loginIofo;
         try {
-            //todo decrypted token with aes or rsa
             byte[] decode = Base64.getDecoder().decode(token);
             String loginJsonStr = new String(decode, "UTF-8");
             loginIofo = JSON.parseObject(loginJsonStr, LoginIofo.class);

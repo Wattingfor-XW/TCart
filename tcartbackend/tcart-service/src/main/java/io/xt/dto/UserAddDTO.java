@@ -1,5 +1,7 @@
 package io.xt.dto;
 
+import java.util.List;
+
 public class UserAddDTO {
     private String username;
     private String firstName;
@@ -7,6 +9,15 @@ public class UserAddDTO {
     private String email;
     private String avatarUrl;
     private String password;
+    public List<String> roles;
+
+    public List<String> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<String> roles) {
+        this.roles = roles;
+    }
 
     public String getUsername() {
         return username;
