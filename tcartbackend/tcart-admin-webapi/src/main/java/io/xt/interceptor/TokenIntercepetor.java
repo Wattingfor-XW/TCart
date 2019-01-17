@@ -16,15 +16,15 @@ import java.util.Date;
 public class TokenIntercepetor implements HandlerInterceptor  {
     private String [] urls={
             "/user/login",
-            "/error",
-            "/user/getUserWithPage",
-            "/user/verifyCode",
-            "/user/resetPassword",
-            "/user/changePassword"
+            "/error"
     };
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+        String method = request.getMethod();
+        if(method.equals("OPTIONS")){
+            return true;
+        }
         boolean contains = Arrays.asList(urls).contains(request.getRequestURI());
         if (contains){
             return true;
