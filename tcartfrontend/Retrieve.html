@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="assets/css/elementui.css">
+    <title>Document</title>
+    <script src="assets/js/vue.js"></script>
+    <script src="assets/js/elementui.js"></script>
+    <script src="assets/js/axios.min.js"></script>
+    <script src="assets/js/common.js"></script>
+</head>
+<body>
+    <div id="app">
+        <el-input v-model="username" placeholder="请输入账户"></el-input>
+        <el-input v-model="email" placeholder="请输入邮箱"></el-input>
+        <el-input v-model="code" placeholder="请输入验证码"></el-input>
+        <el-input v-model="password" placeholder="请输入新密码"></el-input>
+        <el-button type="text" @click="handleRetrieveClick">获取验证码</el-button> 
+        <el-button type="text" @click="handleupdateClick">修改密码</el-button> 
+    </div>
+    <script src="js/Retrieve.js"></script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+var app = new Vue({
+    el:'#app',
+    data:{
+        email:'',
+        code:'',
+        username:'',
+        password:''
+    },
+    methods:{
+        handleRetrieveClick(){
+            alert(this.username),
+        
+            axios.get('/user/resetPassword',{
+                params:{
+                    username:this.username,
+                    email:this.email
+                }
+            }).then(function(response){
+                alert('验证码已发送')
+            }).catch(function(error){
+                alert('验证码发送失败')
+            })
+        },
+        handleupdateClick(){
+            axios.get('/user/verifyCode',{
+                params:{
+                    username:this.username,
+                    email:this.email,
+                    code:this.code,
+                    password:this.password
+                }
+            }).then(function(response){
+                alert("密码已重置")
+            }).catch(function(error){
+                alert("重置密码失败")
+            })
+        }
+    }
+})
