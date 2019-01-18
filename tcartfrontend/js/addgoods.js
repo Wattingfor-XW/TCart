@@ -1,8 +1,8 @@
 var app = new Vue({
     el:'#app',
     data:{
-       goodsname:'',
-       price:''
+       goodsrid:'',
+       goodsname:''
     },
     methods:{
         handleAddClick(){
@@ -10,8 +10,8 @@ var app = new Vue({
         },
         register(){
             axios.post('/goods/addGoods',{
-                goodname:this.goodname,
-                price:this.price
+                goodname:this.goodsid,
+                price:this.goodsname
             }).then(function (response){
                 console.log(response);
                 alert('上架成功');

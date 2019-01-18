@@ -27,7 +27,7 @@ var emp = new Vue({
             this.selectedUserIds = users.map(u => u.userId);
         },
         handleRegisterClick(){
-            location.href="register.html"
+            location.href="adduser.html"
         },
         handleBatchdelecClick(){
             console.log('batch delete click');
@@ -37,7 +37,7 @@ var emp = new Vue({
             axios.post('/user/batchDelete', this.selectedUserIds)
               .then(function (response) {
                 console.log(response);
-                alert('删除成功');
+                alert('注销成功');
                 location.reload();
               })
               .catch(function (error) {

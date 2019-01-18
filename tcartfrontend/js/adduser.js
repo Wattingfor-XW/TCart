@@ -1,8 +1,12 @@
 var app = new Vue({
     el:'#app',
     data:{
-       userid:'',
-       username:''
+       username:'',
+       firstname:'',
+       lastname:'',
+       email:'',
+       password:'',
+       selectedRoles:[]
     },
     methods:{
         handleAddClick(){
@@ -10,15 +14,19 @@ var app = new Vue({
         },
         register(){
             axios.post('/user/addUser',{
-                goodname:this.userid,
-                price:this.username
+                username:this.username,
+                firstname:this.firstname,
+                lastname:this.lastname,
+                email:this.email,
+                password:this.password,
+                roles:this.selectedRoles
             }).then(function (response){
                 console.log(response);
-                alert('上架成功');
+                alert('注册成功');
                 location.href= 'emp.html';
             }).catch(function(error){
                 console.log(error);
-                alert('上架失败')
+                alert('注册失败')
             }); 
         }
     }
