@@ -18,7 +18,8 @@ public class TokenIntercepetor implements HandlerInterceptor  {
             "/user/login",
             "/error",
             "/user/resetPassword",
-            "/user/verifyCode"
+            "/user/verifyCode",
+            "/user/getUserWithPage"
     };
 
     @Override

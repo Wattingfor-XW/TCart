@@ -11,7 +11,7 @@ var emp = new Vue({
     },
     methods:{
         getUser(){
-            axios.get('/user/getUsersWithPage',{
+            axios.get('/user/getUserWithPage',{
                 params:{
                     pageNum:this.pageNum
                 }
@@ -22,6 +22,9 @@ var emp = new Vue({
                 console.log(error);
             });
         },
+        handleCurrentChange(){
+          
+        },
         handleSelectionChange(users){
             console.log(users);
             this.selectedUserIds = users.map(u => u.userId);
@@ -30,7 +33,6 @@ var emp = new Vue({
             location.href="adduser.html"
         },
         handleBatchdelecClick(){
-            console.log('batch delete click');
             this.batchDelete();
         },
         batchDelete(){
@@ -42,8 +44,11 @@ var emp = new Vue({
               })
               .catch(function (error) {
                 console.log(error);
-                alert(error.response.data.message);
+                alert(error);
               });
+        },
+        selectedUserIds(){
+            selectedUserIds:this.selectedUserIds;
         }
     }
 })

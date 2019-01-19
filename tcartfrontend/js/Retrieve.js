@@ -30,7 +30,8 @@ var app = new Vue({
                     password:this.password
                 }
             }).then(function(response){
-                alert("密码已重置")
+                location.href="login.html";
+                alert("密码已重置,请进行登陆")
             }).catch(function(error){
                 alert("重置密码失败")
             })

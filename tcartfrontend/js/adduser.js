@@ -15,8 +15,8 @@ var app = new Vue({
         register(){
             axios.post('/user/addUser',{
                 username:this.username,
-                firstname:this.firstname,
-                lastname:this.lastname,
+                firstName:this.firstName,
+                lastName:this.lastName,
                 email:this.email,
                 password:this.password,
                 roles:this.selectedRoles

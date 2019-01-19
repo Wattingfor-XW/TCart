@@ -21,8 +21,10 @@ var app = new Vue({
                 console.log('resoinse');
                 localStorage['token']='TCat '+response.data;
                 location.href='index.html';
+                alert("登陆成功")
             })
             .catch(function (error) {
+                alert("登陆失败")
                 console.log(error);
             });
         }

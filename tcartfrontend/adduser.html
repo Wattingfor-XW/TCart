@@ -14,10 +14,14 @@
 <body>  
     <div id="app">
             <el-input v-model="username" placeholder="请输入账户"></el-input>
-            <el-input v-model="firstname" placeholder="请输入姓"></el-input>
-            <el-input v-model="lastname" placeholder="请输入名"></el-input>
+            <el-input v-model="firstName" placeholder="请输入姓"></el-input>
+            <el-input v-model="lastName" placeholder="请输入名"></el-input>
             <el-input v-model="email" placeholder="请输入邮箱" ></el-input>
             <el-input v-model="password" placeholder="请输入密码" ></el-input>
+            <el-select v-model="selectedRoles" multiple placeholder="请选择角色">
+                    <el-option label="管理员" value="admin"></el-option>
+                    <el-option label="普通用户" value="user"> </el-option>
+            </el-select>
             <el-button type="primary" @click="handleAddClick">注册</el-button>
     </div>
     <script src="js/adduser.js"></script>

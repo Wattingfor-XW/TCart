@@ -59,8 +59,7 @@ public class UsetServiceImpl implements UserService {
 
     @Override
     public PageInfo<UserListDTO> getUsersWithPage(Integer pageNum) {
-       //todo chang page size
-        PageHelper.startPage(pageNum,10);
+        PageHelper.startPage(pageNum,2);
         Page<UserListDTO> users = userMapper.selectWithPage();
         PageInfo<UserListDTO> userPageInfo = users.toPageInfo();
         return userPageInfo;
