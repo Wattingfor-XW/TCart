@@ -2,17 +2,22 @@ package io.xt.controller;
 
 import com.github.pagehelper.PageInfo;
 import io.xt.dto.ProductListDTO;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import io.xt.pojo.Product;
+import io.xt.service.ProductService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/product")
 @CrossOrigin
 public class ProductController {
+
+    @Autowired
+    ProductService productService;
+
     @GetMapping("/getProductWithPage")
-    public PageInfo<ProductListDTO> getProductWithPage(Integer pageNuM){
-        return null;
+    public PageInfo<Product> getProductWithPage(@RequestParam(required = false,defaultValue = "1") Integer pageNum){
+        PageInfo<Product> productWithPage = productService.fetchList(pageNum);
+        return productWithPage;
     }
 }

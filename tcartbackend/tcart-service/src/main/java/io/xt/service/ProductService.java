@@ -1,9 +1,10 @@
 package io.xt.service;
 
 import com.github.pagehelper.PageInfo;
-import io.xt.dto.ProductListDTO;
+import io.xt.pojo.Product;
 
 public interface ProductService {
 
-    public PageInfo<ProductListDTO> getProductWithPage(Integer pageNum);
+
+    PageInfo<Product> fetchList(Integer pageNum);
 }
