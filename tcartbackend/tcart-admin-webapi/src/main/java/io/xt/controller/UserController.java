@@ -83,8 +83,8 @@ public class UserController {
     }
 
     @GetMapping("/getUserWithPage")
-    public PageInfo<UserListDTO> getUserWithPage(@RequestParam(required = false,defaultValue = "1") Integer pageNum){
-        PageInfo<UserListDTO> usersWithPage = userService.getUsersWithPage(pageNum);
+    public PageInfo<User> getUserWithPage(@RequestParam(required = false,defaultValue = "1") Integer pageNum){
+        PageInfo<User> usersWithPage = userService.getUsersWithPage(pageNum);
         return usersWithPage;
     }
 

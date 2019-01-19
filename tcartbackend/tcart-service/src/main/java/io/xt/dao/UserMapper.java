@@ -19,7 +19,7 @@ public interface UserMapper {
 
     int updateByPrimaryKey(User record);
 
-    Page<UserListDTO> selectWithPage();
+    Page<User> selectWithPage();
 
     User selectByEmail(String email);
 

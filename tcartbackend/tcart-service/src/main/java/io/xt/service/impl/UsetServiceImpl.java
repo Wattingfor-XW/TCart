@@ -58,10 +58,10 @@ public class UsetServiceImpl implements UserService {
     }
 
     @Override
-    public PageInfo<UserListDTO> getUsersWithPage(Integer pageNum) {
+    public PageInfo<User> getUsersWithPage(Integer pageNum) {
         PageHelper.startPage(pageNum,2);
-        Page<UserListDTO> users = userMapper.selectWithPage();
-        PageInfo<UserListDTO> userPageInfo = users.toPageInfo();
+        Page<User> users = userMapper.selectWithPage();
+        PageInfo<User> userPageInfo = users.toPageInfo();
         return userPageInfo;
     }
 

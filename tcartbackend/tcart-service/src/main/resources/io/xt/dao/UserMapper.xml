@@ -137,7 +137,7 @@
       encrypted_password = #{encryptedPassword,jdbcType=CHAR},
     where user_id = #{userId,jdbcType=BIGINT}
   </update>
-  <select id="selectWithPage" resultMap="io.xt.dto.UserListDTO">
+  <select id="selectWithPage" resultMap="BaseResultMap">
     select user_id,username from user
   </select>
   <select id="selectByEmail"  parameterType="java.lang.String" resultMap="BaseResultMap">
