@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
     <link rel="stylesheet" href="assets/css/elementui.css">
+    <title>Document</title>
     <script src="assets/js/vue.js"></script>
     <script src="assets/js/elementui.js"></script>
     <script src="assets/js/axios.min.js"></script>
@@ -20,23 +20,23 @@
                     <el-table-column type="selection"  width="55">
                     </el-table-column>
                       </el-table-column>
-                      <el-table-column  prop="userId" label="商品编号">
+                      <el-table-column  prop="productId" label="商品编号">
                       </el-table-column>
-                      <el-table-column  prop="username"  label="商品名称">
+                      <el-table-column  prop="productCode"  label="商品标识">
                       </el-table-column>
-                      <el-table-column  prop="username"  label="价格">
+                      <el-table-column  prop="name"  label="名称">
                         </el-table-column>
-                        <el-table-column  prop="username"  label="xx">
+                        <el-table-column  prop="price"  label="价格">
                             </el-table-column>
-                            <el-table-column  prop="username"  label="xx">
+                            <el-table-column  prop="brand"  label="品牌">
                                 </el-table-column>
                     </el-table>
-                    <!-- <el-pagination layout="prev, pager, next" :total="pageInfo.total":page-size="pageInfo.pageSize"@current-change="handleCurrentChange">
-                    </el-pagination> -->
+                    <el-pagination layout="prev, pager, next" :total="pageInfo.total":page-size="pageInfo.pageSize"@current-change="handleCurrentChange">
+                    </el-pagination>
                   </template>
                   
 
     </div>
-    <script src="js/goods.js"></script>
+    <script src="js/product.js"></script>
 </body>
 </html>

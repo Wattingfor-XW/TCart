@@ -5,7 +5,7 @@ var emp = new Vue({
             location.href="emp.html"
         },
         handleGOODClick(){
-            location.href="goods.html"
+            location.href="product.html"
         }
     }
 })

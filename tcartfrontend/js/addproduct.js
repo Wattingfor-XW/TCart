@@ -1,21 +1,25 @@
 var app = new Vue({
     el:'#app',
     data:{
-       goodsrid:'',
-       goodsname:''
+        productCode:'',
+        name:'',
+        price:'',
+        brand:''
     },
     methods:{
         handleAddClick(){
             this.register();
         },
         register(){
-            axios.post('/goods/addGoods',{
-                goodname:this.goodsid,
-                price:this.goodsname
+            axios.post('/product/addProduct',{
+                productCode:this.productCode,
+                name:this.name,
+                price:this.price,
+                brand:this.brand
             }).then(function (response){
                 console.log(response);
                 alert('上架成功');
-                location.href= 'goods.html';
+                location.href= 'product.html';
             }).catch(function(error){
                 console.log(error);
                 alert('上架失败')

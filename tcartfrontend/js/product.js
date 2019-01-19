@@ -7,17 +7,17 @@ var app = new Vue({
     },
     mounted:function(){
         alert('进入商品管理');
-        this.getUser();
+        this.getProduct();
     },
     methods:{
-        getUser(){
+        getProduct(){
             axios.get('/product/getProductWithPage',{
                 params:{
                     pageNum:this.pageNum
                 }
             }).then(function(response){
                 console.log(response)
-                emp.pageInfo=response.data;
+                app.pageInfo=response.data;
             }).catch(function (error) {
                 console.log(error);
             });
