@@ -90,9 +90,7 @@ public class UserController {
 
     @PostMapping("/batchDelect")
     public void batchDelect(@RequestBody Long [] userIds){
-        for (Long  userId : userIds){
-         userService.batchDelect(userId);
-        }
+        userService.batchDelect(userIds);
     }
 
     @PostMapping("/changePassword")

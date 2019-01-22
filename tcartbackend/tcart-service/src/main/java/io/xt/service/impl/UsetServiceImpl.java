@@ -66,8 +66,11 @@ public class UsetServiceImpl implements UserService {
     }
 
     @Override
-    public void batchDelect(Long userId) {
-        userMapper.deleteByPrimaryKey(userId);
+    public void batchDelect(Long [] userId) {
+        for (Long ids:userId) {
+            userMapper.deleteByPrimaryKey(ids);
+        }
+
     }
 
     @Override

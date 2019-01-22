@@ -13,6 +13,6 @@ public interface UserService {
     public User getByUsername(String username);
     public void update(UserUpdateDTO userUpdateDTO);
     public PageInfo<User> getUsersWithPage(Integer pageNum);
-    public void batchDelect(Long userId);
+    public void batchDelect(Long [] userId);
     public void changeUserPasswordByEmail(@Param("email") String email,@Param("password") String password);
 }
