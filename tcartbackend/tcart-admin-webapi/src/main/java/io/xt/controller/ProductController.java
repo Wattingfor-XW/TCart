@@ -1,6 +1,7 @@
 package io.xt.controller;
 
 import com.github.pagehelper.PageInfo;
+import io.xt.dto.ProductAddDTO;
 import io.xt.dto.ProductListDTO;
 import io.xt.pojo.Product;
 import io.xt.service.ProductService;
@@ -19,5 +20,10 @@ public class ProductController {
     public PageInfo<Product> getProductWithPage(@RequestParam(required = false,defaultValue = "1") Integer pageNum){
         PageInfo<Product> productWithPage = productService.fetchList(pageNum);
         return productWithPage;
+    }
+    @PostMapping("/addProduct")
+    public void addProduct(@RequestBody ProductAddDTO productAddDTO){
+        System.out.println("hhahahha");
+        productService.addProduct(productAddDTO);
     }
 }

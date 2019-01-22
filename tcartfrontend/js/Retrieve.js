@@ -8,8 +8,6 @@ var app = new Vue({
     },
     methods:{
         handleRetrieveClick(){
-            alert(this.username),
-        
             axios.get('/user/resetPassword',{
                 params:{
                     username:this.username,
